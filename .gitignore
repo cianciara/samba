@@ -1,0 +1,4 @@
+# Configuration files with private data no one wants to share
+create-users.sh
+docker-compose.yml
+smb.conf

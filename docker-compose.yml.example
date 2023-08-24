@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  samba:
+    container_name: samba
+    image: samba
+    build: .
+    ports:
+      - 445:445
+      - 139:139
+    volumes:
+      - ./smb.conf:/etc/samba/smb.conf
+      - /local/path/to/share1:/container/path/to/share1
+      - /local/path/to/share2:/container/path/to/share2
+      - /home/user1:/home/user1
+      - /home/user2:/home/user2
+      - /home/user3:/home/user3
+    command: ["smbd", "--foreground", "--no-process-group"]
+    restart: unless-stopped

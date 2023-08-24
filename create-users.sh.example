@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Create group users
+if grep -q "^users:" /etc/group; then
+    echo "The group 'users' exists."
+else
+     groupadd users
+fi
+
+# User data in the format: username uid gid password
+# Adjust the data according to your users' information so that the permissions in the container are correct.
+users_data=(
+  "user1 1000 1000 password1"
+  "user2 1001 1001 password2"
+  "user3 1002 1002 password3"
+)
+
+# Loop through users data
+for data in "${users_data[@]}"; do
+  read -r username uid gid password <<< "$data"
+
+  # Create user and set Samba password
+  groupadd -g "$gid" "$username"
+  useradd -u "$uid" -g "$gid" -s /bin/bash -G users "$username"
+  echo -e "$password\n$password" | smbpasswd -s -a "$username"
+
+done
