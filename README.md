@@ -1,2 +1,2 @@
 # samba
-Home Samba server in Docker
+Simple samba server in docker container
