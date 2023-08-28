@@ -15,5 +15,4 @@ services:
       - /home/user1:/home/user1
       - /home/user2:/home/user2
       - /home/user3:/home/user3
-    command: ["smbd", "--foreground", "--no-process-group"]
     restart: unless-stopped
